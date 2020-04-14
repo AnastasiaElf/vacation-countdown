@@ -6,7 +6,7 @@ const publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1uaD3WagQYZ
 
 let endDate;
 
-let interval = setInterval(updateTime, 1000);
+let interval;
 
 function updateTime() {
     let now = moment();
@@ -14,13 +14,13 @@ function updateTime() {
     let date = endDate.clone();
 
     let days = date.diff(now, 'days');
-    date = date.subtract(days, 'days');
+    date.subtract(days, 'days');
 
     let hours = date.diff(now, 'hours');
-    date = date.subtract(hours, 'hours');
+    date.subtract(hours, 'hours');
 
     let minutes = date.diff(now, 'minutes');
-    date = date.subtract(minutes, 'minutes');
+    date.subtract(minutes, 'minutes');
 
     let seconds = date.diff(now, 'seconds');
 
@@ -50,6 +50,8 @@ function onGetDataFromSpreadsheet(data) {
         countdownContainerItem.classList.remove("hidden");
 
         updateTime();
+
+        interval = setInterval(updateTime, 1000);
     }
 }
 
